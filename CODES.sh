@@ -412,7 +412,7 @@ hasNodejs ()
     NPM=npm
 
     if runningUbuntu || runningMint; then
-        NODE=nodejs
+        NODE=node
     fi
 
     if $(which $NODE >/dev/null 2>&1) && $(which $NPM >/dev/null 2>&1); then
@@ -434,14 +434,13 @@ installNodejs ()
         elif runningFedora; then
             sudo dnf -y install nodejs npm
         elif runningUbuntu; then
-            curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
-            sudo apt-get update
-            sudo apt-get -y install nodejs
+            brew install nodejs
             sudo npm install -g npm@latest
         elif runningArch; then
             sudo pacman -S --needed --noconfirm nodejs
         elif runningMint; then
-            sudo apt-get -y install nodejs
+            brew install nodejs@16
+            sudo npm install -g npm@latest
         fi
     fi
 
