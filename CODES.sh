@@ -39,8 +39,8 @@ light_cyan='\033[1;36m'
 white='\033[1;37m'
 
 
-MAINTAINER_EMAIL='FreedomBen@protonmail.com'
-RUBY_VER='2.4.0'
+MAINTAINER_EMAIL='lstotler079@gmail.com'
+RUBY_VER='2.7.8'
 
 canvasdir="$HOME"
 checkoutname="canvas-lms"
@@ -434,12 +434,12 @@ installNodejs ()
         elif runningFedora; then
             sudo dnf -y install nodejs npm
         elif runningUbuntu; then
-            brew install nodejs
+            brew install node@16
             sudo npm install -g npm@latest
         elif runningArch; then
             sudo pacman -S --needed --noconfirm nodejs
         elif runningMint; then
-            brew install nodejs@16
+            brew install node@16
             sudo npm install -g npm@latest
         fi
     fi
