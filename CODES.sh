@@ -409,11 +409,11 @@ installRuby ()
 
 hasNodejs ()
 {
-    NODE=nodejs
+    NODE=node
     NPM=npm
 
     if runningUbuntu || runningMint; then
-        NODE=nodejs
+        NODE=node
     fi
 
     if $(which $NODE >/dev/null 2>&1) && $(which $NPM >/dev/null 2>&1); then
@@ -435,17 +435,15 @@ installNodejs ()
         elif runningFedora; then
             sudo dnf -y install nodejs npm
         elif runningUbuntu; then
-            curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
-            sudo apt install nodejs
-            sudo npm install -g npm@latest
-            sudo npm install -g yarn@latest
+        brew install node@16
+        sudo npm install -g npm@latest
+        sudo npm install -g yarn@latest
         elif runningArch; then
             sudo pacman -S --needed --noconfirm nodejs
         elif runningMint; then
-            curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
-            sudo apt install nodejs
-            sudo npm install -g npm@latest
-            sudo npm install -g yarn@latest
+             brew install node@16
+             sudo npm install -g npm@latest
+             sudo npm install -g yarn@latest
         fi
     fi
 
