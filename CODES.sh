@@ -812,7 +812,7 @@ buildCanvasAssets ()
 
         if [[ $RECOMPILE =~ [yY] ]]; then
             pathGems
-            sudo bundle exec rake canvas:compile_assets || {
+            bundle exec rake canvas:compile_assets || {
                 assetFailCheckContinue
                 return $?
             }
@@ -1004,9 +1004,9 @@ installGems ()
     fi
 
     if [ -n "$BUNDLE_VER" ]; then
-        sudo bundle _${BUNDLE_VER}_ install --without mysql
+        bundle _${BUNDLE_VER}_ install --without mysql
     else
-        sudo bundle install --without mysql
+        bundle install --without mysql
     fi
 
     retval="$?"
