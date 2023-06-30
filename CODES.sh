@@ -214,7 +214,7 @@ installDistroDependencies ()
         sudo dnf -y install postgresql-devel
         sudo dnf -y install postgresql-server
     elif runningUbuntu; then
-        sudo apt-get update && sudo apt-get install software-properties-common && sudo add-apt-repository ppa:brightbox/ruby-ng && sudo apt update
+        sudo apt-get update && 
         green "Finished running 'apt-get update'.  Installing packages\n"
         sudo apt-get -y install ruby2.7
         sudo apt-get -y install zlib1g-dev
@@ -395,7 +395,8 @@ installRuby ()
         elif $(runningFedora); then
             sudo dnf -y install ruby
         elif $(runningUbuntu); then
-            sudo apt-get -y install ruby
+            sudo add-apt-repository ppa:instructure/ruby
+            sudo apt-get -y install ruby3.1 ruby3.1-dev
         elif $(runningArch); then
             sudo pacman -S --needed --noconfirm ruby
         elif $(runningMint); then
@@ -408,11 +409,11 @@ installRuby ()
 
 hasNodejs ()
 {
-    NODE=node
+    NODE=nodejs
     NPM=npm
 
     if runningUbuntu || runningMint; then
-        NODE=node
+        NODE=nodejs
     fi
 
     if $(which $NODE >/dev/null 2>&1) && $(which $NPM >/dev/null 2>&1); then
@@ -434,13 +435,17 @@ installNodejs ()
         elif runningFedora; then
             sudo dnf -y install nodejs npm
         elif runningUbuntu; then
-            brew install node@16
+            curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
+            sudo apt install nodejs
             sudo npm install -g npm@latest
+            sudo npm install -g yarn@latest
         elif runningArch; then
             sudo pacman -S --needed --noconfirm nodejs
         elif runningMint; then
-            brew install node@16
+            curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
+            sudo apt install nodejs
             sudo npm install -g npm@latest
+            sudo npm install -g yarn@latest
         fi
     fi
 
@@ -588,7 +593,7 @@ installPostgres ()
         elif runningFedora; then
             sudo dnf -y install postgresql postgresql-devel postgresql-server
         elif runningUbuntu; then
-            sudo apt-get -y install postgresql postgresql-contrib
+            sudo apt-get -y install postgresql-12 postgresql-contrib
         elif runningArch; then
             sudo pacman -S --needed --noconfirm postgresql
         elif runningMint; then
