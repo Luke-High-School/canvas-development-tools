@@ -1004,9 +1004,9 @@ installGems ()
     fi
 
     if [ -n "$BUNDLE_VER" ]; then
-        bundle _${BUNDLE_VER}_ install --without mysql
+        sudo bundle _${BUNDLE_VER}_ install --without mysql
     else
-        bundle install --without mysql
+        sudo bundle install --without mysql
     fi
 
     retval="$?"
